@@ -3659,6 +3659,65 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
   padding-left: 0 !important;
 }
 
+/* ==== Jellyfin 10.11 — center the rest + restore scroller arrows ==== */
+
+/* A) Center the whole content area below the hero */
+#itemDetailPage .detailSection,
+#itemDetailPage .detailSectionContent,
+#itemDetailPage .detailPageContent {
+  max-width: min(1100px, 90%) !important;  /* same width as hero */
+  margin: 0 auto !important;
+}
+
+/* B) Put the two info cards in a tidy centered grid on desktop */
+@media (min-width: 64em) {
+  #itemDetailPage .detailSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1rem;
+  }
+}
+
+/* C) Stop stretching scrollers edge-to-edge on the detail page */
+#itemDetailPage .emby-scroller-container,
+#itemDetailPage .emby-scroller,
+#itemDetailPage .scrollX {
+  margin: 0 auto !important;
+  padding: 0 !important;
+  max-width: min(1100px, 90%) !important;
+}
+
+/* D) Make sure the section headers align with the centered content */
+#itemDetailPage .sectionTitleContainer,
+#itemDetailPage .sectionTitle,
+#itemDetailPage .sectionTitleContainer-cards {
+  max-width: min(1100px, 90%) !important;
+  margin: 0 auto !important;
+}
+
+/* E) Restore the horizontal scroller arrows (visibility + stacking) */
+#itemDetailPage .emby-scrollbuttons {
+  display: grid !important;
+  place-items: center;
+  opacity: 1 !important;
+  z-index: 5;                          /* stay above backdrops */
+}
+
+#itemDetailPage .emby-scrollbuttons .paper-icon-button-light,
+#itemDetailPage .emby-scrollbuttons .emby-scrollbuttons-button {
+  display: inline-flex !important;
+  opacity: 1 !important;
+}
+
+#itemDetailPage .emby-scrollbuttons .material-icons {
+  color: var(--textColor) !important;
+}
+
+/* F) If any overlay from the hero overlaps, keep it in its lane */
+#itemDetailPage .detailPageWrapperContainer { z-index: 1; }
+#itemDetailPage .detailSection              { z-index: 2; position: relative; }
+
 /* Uncomment this to bring back the original ElegantFin header design - start */
 
 /* .skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
@@ -3677,3 +3736,4 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
 } */
 
 /* Uncomment this to bring back the original ElegantFin header design - end */
+
