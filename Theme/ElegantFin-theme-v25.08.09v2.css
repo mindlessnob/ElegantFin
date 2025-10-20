@@ -1,4 +1,4 @@
-/* ElegantFin Theme for Jellyfin by lscambo13 - Patched for Jellyfin 10.11.0 */
+/* ElegantFin Theme for Jellyfin by lscambo13 */
 
 /* Add-ons: Uncomment to enable */
 /* @import url(./assets/add-ons/extras-media-bar-nightly.css); */
@@ -7,24 +7,8 @@
 /* Inter Font Family */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* JELLYFIN 10.9+ FIX START */
-.dashboardDocument #dashboardPage .padded-left.padded-right,
-.dashboardDocument .content-primary {
-    padding-top: 4.25rem !important;
-}
-
-.detailPagePrimaryContainer {
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-#itemDetailPage .skinHeader-withBackground.semiTransparent {
-    display: flex !important;
-}
-/* JELLYFIN 10.9+ FIX END */
-
 :root {
-    --elegantFinFooterText: "ElegantFin v25.08.08";
+    --elegantFinFooterText: "ElegantFin v25.08.08 -edit";
 
     /* Base theme colors */
     color-scheme: dark;
@@ -3613,6 +3597,66 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
 
 .remoteControlContent {
     padding: 0 var(--sidePadding) !important;
+}
+
+/* === ElegantFin classic centered hero — Jellyfin 10.11+ === */
+
+.layout-desktop #itemDetailPage .detailPageWrapperContainer {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  min-height: 65vh;
+  margin-top: 0 !important;
+}
+
+/* 1. Collapse poster/clear-logo container but keep DOM intact */
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer {
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2. Center the title + info block */
+.layout-desktop #itemDetailPage .detailRibbon {
+  grid-row: 1;
+  grid-column: 1;
+  width: min(1100px, 90%);
+  text-align: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .75rem;
+  z-index: 2;
+  padding: 0 !important;
+  margin: 0 auto !important;
+}
+
+/* 3. Center the play buttons directly below the info block */
+.layout-desktop #itemDetailPage .mainDetailButtons {
+  grid-row: 1;
+  grid-column: 1;
+  margin-top: 3.5rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 3;
+}
+
+/* 4. Center the name and info lines */
+#itemDetailPage .nameContainer,
+#itemDetailPage .itemMiscInfo {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* 5. Neutralize legacy side-padding offset */
+.layout-desktop [dir="ltr"] #itemDetailPage .detailPagePrimaryContainer,
+.layout-desktop [dir="ltr"] #itemDetailPage .detailRibbon {
+  padding-left: 0 !important;
 }
 
 /* Uncomment this to bring back the original ElegantFin header design - start */
