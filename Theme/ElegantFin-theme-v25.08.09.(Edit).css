@@ -1,27 +1,39 @@
-/* ElegantFin Theme for Jellyfin by lscambo13 - Patched for Jellyfin 10.11.0 */
+/* ElegantFin Theme for Jellyfin by lscambo13 (Forked by me) - Patched for Jellyfin 11.1.0+ */
 
 /* Add-ons: Uncomment to enable */
-/* @import url(./assets/add-ons/extras-media-bar-nightly.css); */
 /* @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/custom-media-covers-latest-min.css"); */
 
 /* Inter Font Family */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* JELLYFIN 10.9+ FIX START */
+/* === JELLYFIN 10.9+ FIXES START === */
+
+/* FIX 1: Restore top padding on the Dashboard page */
 .dashboardDocument #dashboardPage .padded-left.padded-right,
 .dashboardDocument .content-primary {
     padding-top: 4.25rem !important;
 }
 
-.detailPagePrimaryContainer {
+/* FIX 2: Correct the item details page layout */
+.layout-desktop .detailImageContainer {
+    display: none; /* Hide the poster's container entirely to allow text to center */
+}
+.layout-desktop .detailRibbon {
+    height: auto !important; /* REMOVE the old fixed height that created the huge gap */
+    min-height: 32vh;        /* Use a minimum height to maintain the hero effect */
+    display: flex;           /* Use flexbox to control the content inside */
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-end; /* This is the KEY: pushes all content to the bottom */
+    width: 100%;             /* Ensure it takes up the full width */
 }
 
+/* FIX 3: Ensure the header/back button is always visible on the details page */
 #itemDetailPage .skinHeader-withBackground.semiTransparent {
     display: flex !important;
 }
-/* JELLYFIN 10.9+ FIX END */
+
+/* === JELLYFIN 10.9+ FIXES END === */
+
 
 :root {
     --elegantFinFooterText: "ElegantFin v25.08.08";
@@ -876,8 +888,6 @@ html {
 .detailPagePrimaryContainer {
     align-content: space-between;
     align-items: stretch;
-    justify-content: end;
-    flex-direction: column;
     /* center content on desktop */
     align-items: center;
     text-align: center;
@@ -972,9 +982,9 @@ html {
     place-content: center;
 }
 
-.detailRibbon {
+/* .detailRibbon {
     background-color: transparent;
-}
+} */
 
 .mediaInfoItem {
     border-radius: var(--smallRadius);
@@ -1014,10 +1024,10 @@ html {
     content: "%";
 }
 
-.layout-desktop .detailRibbon {
+/* .layout-desktop .detailRibbon {
     height: 32vh !important;
     margin-top: unset !important;
-}
+} */
 
 .layout-desktop [dir=ltr] .detailPagePrimaryContainer,
 .layout-tv [dir=ltr] .detailPagePrimaryContainer {
@@ -1158,10 +1168,10 @@ html {
     position: fixed;
 }
 
-.layout-desktop .detailImageContainer .card {
+/* .layout-desktop .detailImageContainer .card {
     top: unset !important;
     width: 22vh !important;
-}
+} */
 
 .detailImageContainer .card.backdropCard {
     width: 40vh !important;
@@ -1169,9 +1179,9 @@ html {
     margin-bottom: 1em;
 }
 
-.detailImageContainer .card {
+/* .detailImageContainer .card {
     display: none;
-}
+} */
 
 .layout-tv .detailImageContainer .card {
     width: 23vw !important;
@@ -2541,9 +2551,9 @@ div[data-role=controlgroup] a.ui-btn-active {
     gap: 1em;
 }
 
-.detailImageContainer .card {
+/* .detailImageContainer .card {
     position: inherit !important;
-}
+} */
 
 .trackSelections {
     order: 3;
@@ -2607,10 +2617,10 @@ div[data-role=controlgroup] a.ui-btn-active {
     text-align: start;
 }
 
-.layout-desktop .detailSectionContent {
+/* .layout-desktop .detailSectionContent {
     align-content: end;
     min-height: 15vh;
-}
+} */
 
 .itemDetailsGroup {
     order: 2;
@@ -2713,9 +2723,9 @@ div[data-role=controlgroup] a.ui-btn-active {
     border: var(--defaultBorder);
 }
 
-.dashboardDocument .content-primary {
+/* .dashboardDocument .content-primary {
     padding-top: 4.25rem;
-}
+} */
 
 .editorNode {
     display: flex;
