@@ -3718,6 +3718,73 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
 #itemDetailPage .detailPageWrapperContainer { z-index: 1; }
 #itemDetailPage .detailSection              { z-index: 2; position: relative; }
 
+/* ==== Jellyfin 10.11 — center sections below hero + restore arrows ==== */
+
+/* 1) Give the whole details area the same centered width as the hero */
+#itemDetailPage .detailPageContent,
+#itemDetailPage .detailSectionContent,
+#itemDetailPage .detailSection {
+  max-width: min(1100px, 90%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 2) Keep the two info cards in a tidy centered grid */
+@media (min-width: 64em) {
+  #itemDetailPage .detailSection {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    column-gap: 2rem !important;
+    row-gap: 1rem !important;
+  }
+}
+
+/* 3) Stop stretching the horizontal scrollers edge-to-edge */
+#itemDetailPage .emby-scroller-container,
+#itemDetailPage .emby-scroller,
+#itemDetailPage .scrollX {
+  max-width: min(1100px, 90%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+
+/* 4) Align section headers with the centered scrollers */
+#itemDetailPage .sectionTitleContainer,
+#itemDetailPage .sectionTitleContainer-cards,
+#itemDetailPage .sectionTitle {
+  max-width: min(1100px, 90%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 5) Restore and surface the left/right arrow buttons on carousels */
+#itemDetailPage .emby-scrollbuttons {
+  display: grid !important;
+  place-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 5 !important;          /* above backdrop */
+}
+
+#itemDetailPage .emby-scrollbuttons .emby-scrollbuttons-button,
+#itemDetailPage .emby-scrollbuttons .paper-icon-button-light {
+  display: inline-flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#itemDetailPage .emby-scrollbuttons .material-icons {
+  color: var(--textColor) !important;
+}
+
+/* 6) Ensure hero overlay doesn’t cover the scrollers */
+#itemDetailPage .detailPageWrapperContainer { z-index: 1 !important; }
+#itemDetailPage .detailSection              { position: relative !important; z-index: 2 !important; }
+
+
 /* Uncomment this to bring back the original ElegantFin header design - start */
 
 /* .skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
@@ -3736,4 +3803,5 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
 } */
 
 /* Uncomment this to bring back the original ElegantFin header design - end */
+
 
