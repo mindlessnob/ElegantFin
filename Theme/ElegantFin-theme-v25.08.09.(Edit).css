@@ -3197,3 +3197,20 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
 .remoteControlContent {
     padding: 0 var(--sidePadding) !important;
 }
+
+/* --- Jellyfin 10.11 : center the primary details & buttons --- */
+#itemDetailPage .detailPagePrimaryContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;   /* center horizontally */
+  justify-content: center !important;/* center vertically within its ribbon */
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 0 !important;       /* override theme's desktop left padding */
+}
+
+/* (Optional) ensure the ribbon itself centers its children vertically */
+#itemDetailPage .detailRibbon {
+  display: flex;
+  align-items: center;
+}
