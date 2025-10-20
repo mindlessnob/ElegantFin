@@ -1,39 +1,27 @@
-/* ElegantFin Theme for Jellyfin by lscambo13 - Patched for Jellyfin 1011 */
+/* ElegantFin Theme for Jellyfin by lscambo13 - Patched for Jellyfin 10.11.0 */
 
-/* === JELLYFIN 10.11 FIXES START === */
+/* Add-ons: Uncomment to enable */
+/* @import url(./assets/add-ons/extras-media-bar-nightly.css); */
+/* @import url("https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/custom-media-covers-latest-min.css"); */
 
-/* FIX 1: Restore top padding on the Dashboard page */
+/* Inter Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* JELLYFIN 10.9+ FIX START */
 .dashboardDocument #dashboardPage .padded-left.padded-right,
 .dashboardDocument .content-primary {
     padding-top: 4.25rem !important;
 }
 
-/* FIX 2: Correct the item details page layout */
-.layout-desktop .detailImageContainer {
-    display: none; /* Hide the poster's container entirely to allow text to center */
-}
-.layout-desktop .detailRibbon {
-    height: auto !important; /* REMOVE the old fixed height that created the huge gap */
-    min-height: 32vh;        /* Use a minimum height to maintain the hero effect */
-    display: flex;           /* Use flexbox to control the content inside */
+.detailPagePrimaryContainer {
     flex-direction: column;
-    justify-content: flex-end; /* This is the KEY: pushes all content to the bottom */
-    width: 100%;             /* Ensure it takes up the full width */
-}
-.layout-desktop .infoWrapper {
-    text-align: center; /* Re-center the text now that the parent container is fixed */
+    justify-content: flex-end;
 }
 
-/* FIX 3: Ensure the header/back button is always visible on the details page */
 #itemDetailPage .skinHeader-withBackground.semiTransparent {
     display: flex !important;
 }
-
-/* === JELLYFIN 10.9+ FIXES END === */
-
-
-/* Inter Font Family */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* JELLYFIN 10.9+ FIX END */
 
 :root {
     --elegantFinFooterText: "ElegantFin v25.08.08";
@@ -94,6 +82,7 @@
     --hoverGradientH: linear-gradient(90deg, transparent, rgb(255 255 255 / 100%) 45%, rgb(255 255 255 / 100%) 55%, transparent);
 
     --itemBackdropMask: linear-gradient(180deg, rgba(0, 0, 0, .8), 75%, transparent);
+    /* --themeVideoPlayerMask: linear-gradient(180deg, rgba(0, 0, 0, 1), 85%, transparent); */
 
     /* standard component sizes */
     --largerRadius: 1.25em;
@@ -115,15 +104,37 @@
 
     --shadow: .1em .1em .15em hsla(0, 0%, 0%, .3);
 
+    /* use "" to enable a fancy blur behind the app header / top bar [default]; 
+       use none (without quotes) to disable it */
     --headerBlurLayerVisibility: "";
+
+    /* use --headerColorGradient if the above is enabled [default]; 
+       use --headerColorGradientAlt otherwise */
     --headerBackground: var(--headerColorGradient);
 
+    /* fill out YOUR-JELLYFIN-SERVER-ADDRESS with a relevant host address;
+       url("<YOUR-JELLYFIN-SERVER-ADDRESS>/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2"); */
     --loginPageBgUrl: url("");
     --loginPageText: "Sign in to continue";
+
+    /* use 2.8em keep the overlay play button at bottom-left corner [default];
+       use 50% to place it at the center of a card */
     --overlayPlayButtonPosition: 2.8em;
+
+    /* use 'Material Icons Round' for the new icons [default]; 
+       use 'Material Icons' to revert to old icons */
     --iconPack: 'Material Icons Round', Material Icons;
+
+    /* none: hides the watched and mark favorite buttons on hover [default];
+       block: makes them visible use block */
     --extraCardButtonsVisibility: none;
+
+    /* none: hides the media library card labels [default]; 
+       block: makes them visible */
     --libraryLabelVisibility: none;
+
+    /* use "" to enable the card hover effect [default]; 
+       use none (without quotes) to disable it */
     --cardHoverEffect: "";
 }
 
@@ -141,6 +152,7 @@ html {
 }
 
 /* Material Icons Round */
+/* https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200 */
 @font-face {
     font-family: 'Material Icons Round';
     font-style: normal;
@@ -482,6 +494,8 @@ html {
     --cardCount: 2;
 }
 
+/* if the window width is equal to or more than (at minimum) 300em then the code in the query will trigger */
+/* 16 posters, 12 thumbs */
 @media (min-width: 300em) {
 
     .portraitCard,
@@ -507,6 +521,8 @@ html {
     }
 }
 
+/* if the window width is equal to or less than (at maximum) 300em then the code in the query will trigger */
+/* 15 posters, 11 thumbs */
 @media (max-width: 300em) {
 
     .portraitCard,
@@ -532,6 +548,7 @@ html {
     }
 }
 
+/* 14 posters, 10 thumbs */
 @media (max-width: 270em) {
 
     .portraitCard,
@@ -557,6 +574,7 @@ html {
     }
 }
 
+/* 13 posters, 10 thumbs */
 @media (max-width: 240em) {
 
     .portraitCard,
@@ -582,6 +600,7 @@ html {
     }
 }
 
+/* 12 posters, 9 thumbs, 4K*/
 @media (max-width: 220em) {
 
     .portraitCard,
@@ -607,6 +626,7 @@ html {
     }
 }
 
+/* 11 posters, 9 thumbs */
 @media (max-width: 200em) {
 
     .portraitCard,
@@ -632,6 +652,7 @@ html {
     }
 }
 
+/* 10 posters, 8 thumbs */
 @media (max-width: 170em) {
 
     .portraitCard,
@@ -657,6 +678,7 @@ html {
     }
 }
 
+/* 9 posters, 7 thumbs */
 @media (max-width: 140em) {
 
     .portraitCard,
@@ -682,6 +704,7 @@ html {
     }
 }
 
+/* 8 posters, 7 thumbs, 1080p */
 @media (max-width: 120em) {
 
     .portraitCard,
@@ -707,6 +730,7 @@ html {
     }
 }
 
+/* 7 posters, 6 thumbs */
 @media (max-width: 100em) {
 
     .portraitCard,
@@ -729,6 +753,7 @@ html {
     }
 }
 
+/* 6 posters, 5 thumbs */
 @media (max-width: 80em) {
 
     .portraitCard,
@@ -748,6 +773,7 @@ html {
     }
 }
 
+/* 5 posters, 4 thumbs */
 @media (max-width: 62em) {
 
     .portraitCard,
@@ -767,6 +793,7 @@ html {
     }
 }
 
+/* 4 posters, 3 thumbs */
 @media (max-width: 48.125em) {
 
     .portraitCard,
@@ -786,6 +813,7 @@ html {
     }
 }
 
+/* 3 posters, 2 thumbs, 2 with footer */
 @media (max-width: 30em) {
 
     .portraitCard,
@@ -820,6 +848,7 @@ html {
     --cardWidth: calc(var(--effectiveWidth) / var(--cardCount));
 }
 
+/* this makes the card sizes smaller when phone is in landscape mode */
 @media (orientation: landscape) and (max-height: 40em) {
     .layout-mobile .card {
         --effectiveWidth: calc((65vw - (var(--sidePadding) * 2)));
@@ -844,6 +873,21 @@ html {
     background: linear-gradient(0deg, var(--darkerGradientPointAlpha) 70%, 85%, transparent);
 }
 
+.detailPagePrimaryContainer {
+    align-content: space-between;
+    align-items: stretch;
+    justify-content: end;
+    flex-direction: column;
+    /* center content on desktop */
+    align-items: center;
+    text-align: center;
+    margin-bottom: -1.5em;
+}
+
+.layout-mobile .detailPagePrimaryContainer {
+    padding: .5em var(--sidePadding);
+}
+
 [dir=ltr] .detailPagePrimaryContent {
     padding-right: 0;
 }
@@ -860,10 +904,12 @@ html {
     padding-top: 0;
 }
 
+/* this hides the header home button everywhere except the main media page */
 .skinHeader-withBackground:not(.semiTransparent) .headerHomeButton {
     display: none;
 }
 
+/* workaround to show the header home button on the main media page on phones*/
 .layout-mobile:has(#itemDetailPage:not(.hide)) .headerHomeButton {
     display: block;
 }
@@ -925,7 +971,370 @@ html {
     font-size: 1.5em;
     place-content: center;
 }
-/* --- CONTINUATION OF CSS --- */
+
+.detailRibbon {
+    background-color: transparent;
+}
+
+.mediaInfoItem {
+    border-radius: var(--smallRadius);
+    font-weight: 500;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.itemMiscInfo-primary {
+    column-gap: .5em;
+}
+
+.mediaInfoOfficialRating {
+    background: transparent !important;
+    font-size: .75em;
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.5em;
+    transform: translateY(-.15em);
+    font-weight: 600;
+    border: var(--defaultBorder);
+}
+
+.starIcon {
+    background: linear-gradient(to right, #90cea1, #01b4e4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: -.125em;
+    transform: translateY(-.02em);
+}
+
+[dir=ltr] .mediaInfoCriticRating {
+    background-size: 30%;
+    padding-left: 1.5em;
+}
+
+[dir=ltr] .mediaInfoCriticRating::after {
+    content: "%";
+}
+
+.layout-desktop .detailRibbon {
+    height: 32vh !important;
+    margin-top: unset !important;
+}
+
+.layout-desktop [dir=ltr] .detailPagePrimaryContainer,
+.layout-tv [dir=ltr] .detailPagePrimaryContainer {
+    padding-left: var(--sidePadding);
+}
+
+@keyframes animMoveDown {
+    from {
+        transform: translateY(-2em);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes animMoveDownSecondaryPage {
+    from {
+        transform: translateY(-2em);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: .3;
+    }
+}
+
+@keyframes animMoveUp {
+    from {
+        transform: translateY(-90%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+}
+
+.detailLogo {
+    /* this hides the detail logo by default to make it only show up on modern browsers */
+    display: none;
+}
+
+@supports (aspect-ratio: 1 / 1) {
+    /* this shows the detail logo on modern browsers */
+
+    .detailLogo {
+        display: block;
+        top: calc(100vh - 10em - var(--primaryItemPageNegativeSpace));
+        left: 0;
+        width: 40%;
+        transform: translateY(-100%);
+        margin: auto 30%;
+        height: 25vh;
+        background-position: bottom;
+    }
+
+    .layout-tv .detailLogo {
+        display: block;
+    }
+}
+
+.layout-mobile .detailLogo {
+    display: block;
+    z-index: 1;
+    position: absolute;
+    left: 1em;
+    top: 45vh;
+    margin: auto 0%;
+    width: calc(100vw - 2em);
+    max-height: 17vh;
+    animation: animMoveUp 1s ease-out forwards;
+}
+
+.itemBackdrop {
+    display: block !important;
+}
+
+/* Theme video styling rolled back because jellyfin does not differentiate between the main video player and theme video playback nicely*/
+/* .videoPlayerContainer {
+    position: relative !important;
+    -webkit-mask: var(--themeVideoPlayerMask);
+    mask: var(--themeVideoPlayerMask);
+    height: 90vh;
+}
+
+.layout-mobile .videoPlayerContainer {
+    z-index: 1;
+    height: 35vh;
+}
+
+.videoPlayerContainer>.htmlvideoplayer {
+    width: -webkit-fill-available;
+    object-fit: cover;
+} */
+
+.layout-desktop .itemBackdrop {
+    height: calc(100vh - 32vh - var(--primaryItemPageNegativeSpace)) !important;
+}
+
+.layout-mobile .itemBackdrop {
+    margin-top: 0;
+    position: sticky;
+    top: -30%;
+    -webkit-mask: var(--itemBackdropMask);
+    mask: var(--itemBackdropMask);
+    animation: animMoveDown .5s ease-out forwards;
+    height: 45vh;
+}
+
+.layout-mobile #itemDetailPage:has(.detailLogo.hide) .itemBackdrop {
+    margin-bottom: -10vh;
+}
+
+.layout-tv .detailLogo {
+    height: 20vh;
+    top: 39vh;
+    left: 30vw;
+    width: 60vw;
+    margin: auto 5vw;
+}
+
+.layout-tv .itemBackdrop {
+    height: 33vh;
+}
+
+.detailImageContainer.padded-left {
+    padding-left: 0;
+}
+
+.layout-tv .detailImageContainer.padded-left {
+    padding-left: 0;
+    height: 0;
+    position: fixed;
+}
+
+.layout-desktop .detailImageContainer .card {
+    top: unset !important;
+    width: 22vh !important;
+}
+
+.detailImageContainer .card.backdropCard {
+    width: 40vh !important;
+    max-width: 50vw;
+    margin-bottom: 1em;
+}
+
+.detailImageContainer .card {
+    display: none;
+}
+
+.layout-tv .detailImageContainer .card {
+    width: 23vw !important;
+    display: block !important;
+}
+
+.layout-mobile .detailImageContainer .card {
+    -webkit-filter: drop-shadow(0 0 .25rem rgba(0, 0, 0, .25));
+    filter: drop-shadow(0 0 .25rem rgba(0, 0, 0, .25));
+}
+
+/* this brings the buttons and title to the center in main media page */
+.layout-mobile [dir=ltr] .infoWrapper,
+.layout-mobile .infoWrapper {
+    padding-left: 0;
+}
+
+.infoWrapper {
+    align-content: end;
+    place-items: center;
+    display: grid;
+}
+
+/* Both the blocks below position the poster in main media page in the center */
+.layout-mobile .detailImageContainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-left: 0 !important;
+}
+
+.layout-mobile .detailImageContainer:has(.card:not(.portraitCard)) {
+    height: 0;
+}
+
+.layout-mobile .detailImageContainer .card {
+    position: inherit !important;
+    margin-top: -150%;
+    max-width: 60vw;
+}
+
+.layout-mobile .detailPageWrapperContainer {
+    padding-top: 0;
+    margin-top: .5em;
+}
+
+/* this hides the main media title when the clear logo is available*/
+.detailLogo:not(.hide)~.detailPageWrapperContainer .nameContainer h1,
+#itemDetailPage:has(.detailImageContainer .card.backdropCard) .detailLogo,
+#itemDetailPage:has(.detailImageContainer .cardImageIcon.album) .detailLogo,
+#itemDetailPage:has(.detailImageContainer .cardImageIcon.person) .detailLogo,
+.detailImageContainer .card:not(.portraitCard):has(.cardImageIcon.person) {
+    z-index: 2;
+    display: none;
+}
+
+/* this shows the main media title and the poster when the clear logo is unavailable*/
+.detailLogo.hide~.detailPageWrapperContainer .nameContainer h1 {
+    display: block !important;
+}
+
+.detailImageContainer:has(.backdropCard, .squareCard)~.nameContainer h1,
+.detailImageContainer:has(.cardImageIcon.person)~.nameContainer h1 {
+    display: block !important;
+}
+
+.detailImageContainer .card.backdropCard:has(.cardImageIcon.album) {
+    max-width: 20vh;
+}
+
+.detailImageContainer .card.backdropCard:has(.cardImageIcon.album) .cardScalable {
+    aspect-ratio: 1 / 1;
+}
+
+#childrenContent:has(.listItem[data-type="Audio"]) {
+    border: var(--defaultBorder);
+    border-radius: var(--largeRadius);
+    padding: .5em;
+    background-color: var(--lighterGradientPointAlpha);
+}
+
+/* this shows the poster in the cast, book and music pages */
+.detailImageContainer .card:has(.book, .person, .album),
+.detailImageContainer .card.backdropCard:has(.tv),
+.detailImageContainer .card.backdropCard:has(.live_tv) {
+    display: block;
+}
+
+/* This reduces the top padding in the cast, live tv, episode, song, album and artist pages i.e. shifts up page content */
+#itemDetailPage:has(.detailImageContainer .cardImageIcon.person, .detailImageContainer .cardImageIcon.book) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .cardImageIcon.album) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .backdropCard .cardImageIcon.tv) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .squareCard) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .cardImageIcon.live_tv) .itemBackdrop {
+    height: calc(100vh - 32vh - var(--secondaryItemPageNegativeSpace)) !important;
+}
+
+#itemDetailPage:has(.detailImageContainer .card.backdropCard),
+#itemDetailPage:has(.detailImageContainer .card .cardImageIcon.album) {
+    background: linear-gradient(180deg, var(--darkerGradientPointAlpha) 80%, transparent)
+}
+
+.layout-mobile #itemDetailPage:has(.detailImageContainer .card.backdropCard) .itemBackdrop,
+.layout-mobile #itemDetailPage:has(.detailImageContainer .card .cardImageIcon.album) .itemBackdrop {
+    animation: animMoveDownSecondaryPage .5s ease-out forwards;
+}
+
+.layout-mobile .cardImageIcon {
+    font-size: 3.5em;
+}
+
+@media (max-width: 50em) {
+    .homeLibraryButton {
+        width: 45.6% !important;
+    }
+}
+
+.homeLibraryButton {
+    padding-inline-start: .25em;
+    min-width: 15%;
+}
+
+@media (orientation: portrait) and (max-width: 40em) {
+
+    [data-type=Movie] .listItemImage,
+    [data-type=Series] .listItemImage {
+        display: unset;
+    }
+
+    .dashboardActionsContainer {
+        font-size: min(3.6vw, 98%);
+    }
+}
+
+@media (orientation: portrait) {
+
+    /* hides sync button on home screen on phones only in portrait mode */
+    .layout-mobile .skinHeader.noHomeButtonHeader .headerSyncButton {
+        display: none;
+    }
+
+    .layout-mobile .btnPlay.detailButton:not(.play-button) {
+        flex: 0 0 100%;
+        margin-right: 0 !important;
+    }
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h1,
+h2 {
+    font-weight: 600;
+}
+
+.tagline {
+    font-size: 1.3em;
+    font-weight: 400;
+    margin: 0;
+    font-style: italic;
+    color: var(--textColor);
+}
 
 html,
 .nowPlayingPlaylist,
@@ -2132,6 +2541,10 @@ div[data-role=controlgroup] a.ui-btn-active {
     gap: 1em;
 }
 
+.detailImageContainer .card {
+    position: inherit !important;
+}
+
 .trackSelections {
     order: 3;
     max-width: unset !important;
@@ -2298,6 +2711,10 @@ div[data-role=controlgroup] a.ui-btn-active {
     width: 1.5em;
     height: 1.5em;
     border: var(--defaultBorder);
+}
+
+.dashboardDocument .content-primary {
+    padding-top: 4.25rem;
 }
 
 .editorNode {
@@ -3198,19 +3615,21 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense>div:first-child {
     padding: 0 var(--sidePadding) !important;
 }
 
-/* --- Jellyfin 10.11 : center the primary details & buttons --- */
-#itemDetailPage .detailPagePrimaryContainer {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;   /* center horizontally */
-  justify-content: center !important;/* center vertically within its ribbon */
-  text-align: center;
-  margin: 0 auto;
-  padding-left: 0 !important;       /* override theme's desktop left padding */
+/* Uncomment this to bring back the original ElegantFin header design - start */
+
+/* .skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
+    backdrop-filter: var(--blurLarge);
+    background: var(--headerColor);
+    border: var(--defaultBorder);
+    border-width: 0 0 var(--borderWidth) 0;
 }
 
-/* (Optional) ensure the ribbon itself centers its children vertically */
-#itemDetailPage .detailRibbon {
-  display: flex;
-  align-items: center;
+.skinHeader-blurred:not(.osdHeader):not(.semiTransparent)::after {
+    content: none;
 }
+
+.headerTabs.sectionTabs {
+    height: 4em;
+} */
+
+/* Uncomment this to bring back the original ElegantFin header design - end */
